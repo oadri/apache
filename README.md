@@ -3,8 +3,8 @@
 ```
 version: "3.8"
 services:
-  apache:
-    container_name: apache_server
+  apache:       #creación del contenedor apache server 
+    container_name: apache_server     #asignación del nombre del contedor 
     image: httpd:latest
     networks:
       nt01:
@@ -32,7 +32,7 @@ services:
     ports:
       - 6901:6901
     dns:
-      - 100.0.0.254  # contenedor de dns server
+      - 100.0.0.254  
     environment:
       - VNC_PW=abc123.
 volumes:
