@@ -29,7 +29,7 @@ services:
     ports:
       - 6901:6901
     dns:
-      - 100.0.0.254  # contenedor de dns server
+      - 100.0.0.254 
     environment:
       - VNC_PW=abc123.
 volumes:
