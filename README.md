@@ -46,3 +46,8 @@ networks:     #creación de la red asignada anteriormnete en los contenedores
       config:
         - subnet: 100.0.0.0/24    #subred en la que se encontrará
 ```
+
+##Fichero de configuración /usr/local/apache2/conf/http.conf
+
+Enasdvkasfbfvkhavsfvhaskjdvbdhasd
+
