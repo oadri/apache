@@ -111,3 +111,5 @@ Para terminar, se deberán añadir en el fichero anterior las rutas de "server.k
 ```
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout usr/local/apache2/conf/server.key -out /usr/local/apache2/conf/server.crt
 ```
+La configuración completa del servicio de DNS y del servicio Web Apache se adjuntarán a continuación:
+[link text](https://github.com/oadri/apache-dns)
