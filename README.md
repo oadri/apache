@@ -47,9 +47,20 @@ networks:     #creación de la red asignada anteriormnete en los contenedores
         - subnet: 100.0.0.0/24    #subred en la que se encontrará
 ```
 
-## Fichero de Apache Server
+## Configuración de Apache Web Server
 _Toda la configuración del servicio está alojada en el directorio /usr/local/apache2/conf/_
 
 En primer lugar se deberá editar el fichero httpd-vhosts.conf (directorio: /extra) en el que se configurará el VirtualHost que dará servicio a "paxina1" 
 la cual funcionará sin seguridad (http).
+Para la configuración del VirtualHost los parámetros más importantes a configurar serán "DocumentRoot" y "ServerName" donde el primero,
+será la ruta absoluta de donde se encuentra el directorio que contiene el "index.html" y el segundo será la dirección DNS que identifica la web.
+```
+<VirtualHost *:80>
+    DocumentRoot "/usr/local/apache2/htdocs/paxina1"
+    ServerName paxina1.oadri.gal
+    ErrorLog "logs/dummy-host2.example.com-error_log"
+    CustomLog "logs/dummy-host2.example.com-access_log" common
+</VirtualHost>
+```
+### Configuración de seguridad "https"
 
