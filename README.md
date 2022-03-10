@@ -47,7 +47,8 @@ networks:     #creación de la red asignada anteriormnete en los contenedores
         - subnet: 100.0.0.0/24    #subred en la que se encontrará
 ```
 
-##Fichero de configuración /usr/local/apache2/conf/http.conf
-
-Enasdvkasfbfvkhavsfvhaskjdvbdhasd
+## Fichero de Apache Server
+_Toda la configuración del servicio está alojada en el directorio /usr/local/apache2/conf/_
+En primer lugar se deberá editar el fichero httpd-vhosts.conf (directorio: /extra) en el que se configurará el VirtualHost que dará servicio a "paxina1" la cual funcionará
+sin ssh "http".
 
