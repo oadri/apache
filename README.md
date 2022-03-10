@@ -64,3 +64,50 @@ será la ruta absoluta de donde se encuentra el directorio que contiene el "inde
 ```
 ### Configuración de seguridad "https"
 
+En este caso se dotará de acceso seguro a través del protocolo https a la página "páxina2" para esto, en primer lugar, se deberá habilitar en el fichero de configuración principal "httpd.conf" el siguiente módulo: (descomentar) 
+```
+LoadModule ssl_module modules/mod_ssl.so
+```
+y a continuación, se modificará el VirtualHost dedicado a la configuración SSL. En este archivo se aplicará la misma configuración que en el apartado anterior añadiando la ruta del de la web y la dirección DNS que apuntará a esta.
+En este fichero tabién habrá que descomentar la linea "SSLEngine on".
+```
+<VirtualHost _default_:443>
+
+#   General setup for the virtual host
+DocumentRoot "/usr/local/apache2/htdocs/paxina2"
+ServerName paxina2.oadri.gal:443
+ServerAdmin aalfonsosimon@danielcastelao.org
+ErrorLog /proc/self/fd/2
+TransferLog /proc/self/fd/1
+
+#   SSL Engine Switch:
+#   Enable/Disable SSL for this virtual host.
+SSLEngine on
+
+#   Server Certificate:
+#   Point SSLCertificateFile at a PEM encoded certificate.  If
+#   the certificate is encrypted, then you will be prompted for a
+#   pass phrase.  Note that a kill -HUP will prompt again.  Keep
+#   in mind that if you have both an RSA and a DSA certificate you
+#   can configure both in parallel (to also allow the use of DSA
+#   ciphers, etc.)
+#   Some ECC cipher suites (http://www.ietf.org/rfc/rfc4492.txt)
+#   require an ECC certificate which can also be configured in
+#   parallel.
+SSLCertificateFile "/usr/local/apache2/conf/server.crt"
+#SSLCertificateFile "/usr/local/apache2/conf/server-dsa.crt"
+#SSLCertificateFile "/usr/local/apache2/conf/server-ecc.crt"
+
+#   Server Private Key:
+#   If the key is not combined with the certificate, use this
+#   directive to point at the key file.  Keep in mind that if
+#   you've both a RSA and a DSA private key you can configure
+#   both in parallel (to also allow the use of DSA ciphers, etc.)
+#   ECC keys, when in use, can also be configured in parallel
+SSLCertificateKeyFile "/usr/local/apache2/conf/server.key"
+```
+Por último se debe crear el crtificado digital con openssl, en esta caso desde la terminal del mismo contenedor. 
+Para terminar, se deberán añadir en el fichero anterior las rutas de "server.key" y "server.crt" los cuales son la clave privada y certificado respectivamente. 
+```
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout usr/local/apache2/conf/server.key -out /usr/local/apache2/conf/server.crt
+```
